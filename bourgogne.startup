@@ -1,3 +1,11 @@
 ifconfig eth0 10.0.0.1/8
 # TODO : configurer eth1 , DHCP et iptables
 /etc/init.d/quagga start
+
+
+#eth1
+
+ifconfig eth1 194.167.0.35/28
+
+#DHCP
+/etc/init.d/dhcp3-server start
