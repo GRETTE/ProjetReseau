@@ -7,18 +7,28 @@ ifconfig eth1 194.167.0.35/28
 
 #DHCP
 /etc/init.d/dhcp3-server start
-	
-#NAT
-iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to 10.0.0.1
-
 
 #mur de feu.
+
 #fermer les connections
 #iptables -P INPUT DROP
 #iptables -P OUTPUT DROP
 #iptables -P FORWARD DROP
 
 
+#communiquer avec le routeur
+#iptables -A INPUT -j ACCEPT
+#iptables -A OUTPUT -j ACCEPT
 
 
- 
+
+#iptables -A INPUT -s 192.168.161.128/26 -j ACCEPT
+#iptables -A OUTPUT -d 192.168.161.128/26 -j ACCEPT
+#iptables -A FORWARD -s 192.168.161.128/26 -d 194.167.0.35/28 -j ACCEPT
+
+#iptables -A INPUT -i eth1 -j ACCEPT
+#iptables -A OUTPUT -o eth1 -j ACCEPT
+#iptables -A OUTPUT -o eht0 -j ACCEPT
+
+
+#

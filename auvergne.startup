@@ -9,13 +9,36 @@ ifconfig eth1 192.168.161.130/26
 /etc/init.d/dhcp3-server start
 
 #NAT
+#iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to 10.0.0.4
 
-#tout peut sortir de du réseau lana (j'espère)
-iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to 10.0.0.4
+iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
+#iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 22 -j DNAT --to 192.168.161.131:22
 
 #mur de feu.
+
+#vider les chaines
+#iptables -F
+#iptables -X
+
+
 #fermer les connections
 #iptables -P INPUT DROP
 #iptables -P OUTPUT DROP
 #iptables -P FORWARD DROP
+
+
+#communiquer avec le routeur
+#iptables -A INPUT -j ACCEPT
+#iptables -A OUTPUT -j ACCEPT
+
+#iptables -A FORWARD -s 194.167.0.32/28 -j ACCEPT
+
+
+
+#iptables -A INPUT -i eth1 -j ACCEPT
+#iptables -A OUTPUT -o eth1 -j ACCEPT
+
+
+
+#
