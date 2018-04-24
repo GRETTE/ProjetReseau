@@ -41,4 +41,7 @@ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
 
 
-#
+#SEMBLE OK
+
+#Pour sortir du réseau
+#iptables -A FORWARD -i eth1 -j ACCEPT

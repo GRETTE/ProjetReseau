@@ -32,3 +32,15 @@ ifconfig eth1 194.167.0.35/28
 
 
 #
+#Pour sortir du réseau
+#iptables -A FORWARD -i eth1 -j ACCEPT
+
+
+
+#Autorisation pour lanA
+#iptables -A FORWARD -i eth0 -s 10.0.0.4 -j ACCEPT
+
+
+#iptables -A FORWARD -i eth0 -s 10.0.0.4 -j ACCEPT
+#iptables -A FORWARD -i eth1 -s 194.167.0.32/28 -j ACCEPT
+#
