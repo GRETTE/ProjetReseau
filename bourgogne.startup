@@ -43,4 +43,35 @@ ifconfig eth1 194.167.0.35/28
 
 #iptables -A FORWARD -i eth0 -s 10.0.0.4 -j ACCEPT
 #iptables -A FORWARD -i eth1 -s 194.167.0.32/28 -j ACCEPT
+#OU BIEN
+#iptables -A FORWARD -o eth0 -s 194.167.0.32/28 -j ACCEPT
+#
+
+
+
+#iptables -A FORWARD -i eth1 -j ACCEPT
+#iptables -A FORWARD -m state --state  ESTABLISHED,RELATED -j ACCEPT
+#iptables -A FORWARD -i eth0 -s 10.0.0.4 -j ACCEPT
+#
+#
+
+
+###################################
+#vider toutes les règles
+iptables -F
+iptables -X
+
+
+#refuser toutes les connexions
+iptables -P INPUT DROP
+iptables -P OUTPUT DROP
+iptables -P FORWARD DROP
+
+#communiquer au sein du réseau
+iptables -A INPUT -i eth1 -j ACCEPT
+iptables -A OUTPUT -o eth1 -j ACCEPT
+
+iptables -A INPUT -s 10.0.0.4 -j ACCEPT
+iptables -A OUTPUT -d 10.0.0.4 -j ACCEPT
+iptables -A FORWARD -s 10.0.0.4 -j ACCEPT
 #

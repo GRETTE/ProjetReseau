@@ -11,9 +11,9 @@ ifconfig eth1 192.168.161.130/26
 #NAT
 #iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to 10.0.0.4
 
-iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+#iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
-#iptables -t nat -A PREROUTING -i eth1 -p tcp --dport 22 -j DNAT --to 192.168.161.131:22
+#iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 22 -j DNAT --to 192.168.161.131:22
 
 #mur de feu.
 
@@ -45,3 +45,27 @@ iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
 
 #Pour sortir du réseau
 #iptables -A FORWARD -i eth1 -j ACCEPT
+#iptables -A FORWARD -m state --state  ESTABLISHED,RELATED -j ACCEPT
+
+
+
+###################################
+#vider toutes les règles
+#iptables -F
+#iptables -X
+
+#iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
+#iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 22 -j DNAT --to 192.168.161.131:22
+
+
+#refuser toutes les connexions
+#iptables -P INPUT DROP
+#iptables -P OUTPUT DROP
+#iptables -P FORWARD DROP
+
+#communiquer au sein du réseau
+#iptables -A INPUT -i eth1 -j ACCEPT
+#iptables -A OUTPUT -o eth1 -j ACCEPT
+
+#iptables -A OUTPUT -o eth0 -s 192.168.161.128/26 -j ACCEPT
+#
