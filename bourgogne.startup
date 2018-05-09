@@ -15,6 +15,14 @@ iptables -F
 iptables -X
 
 #fermer les connections
-iptables -P INPUT DROP
-iptables -P OUTPUT DROP
+iptables -P INPUT ACCEPT
+iptables -P OUTPUT ACCEPT
 iptables -P FORWARD DROP
+
+#ouvertures
+iptables -A FORWARD -i eth1 -j ACCEPT
+iptables -A FORWARD -i eth0 -s 10.0.0.4 -j ACCEPT
+iptables -A FORWARD -m state --state  NEW,ESTABLISHED,RELATED -j ACCEPT
+iptables -A FORWARD -p tcp -i eth0 -o eth1 --dport 22 -s 194.167.0.39/28 -j ACCEPT
+iptables -A FORWARD -p tcp -i eth0 -o eth1 --dport 53 -s 194.167.0.40/28 -j ACCEPT
+iptables -A FORWARD -p tcp -i eth0 -o eth1 --dport 80 -s 194.167.0.38/28 -j ACCEPT
