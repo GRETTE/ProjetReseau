@@ -7,6 +7,6 @@ $TTL	60000
 			60000 ; negative cache ttl
 			)
 @		IN	NS	dns.aliceetbob.net.
-dns		IN	A	127.0.0.1 ; TODO
-www		IN	A	127.0.0.1 ; TODO
-ssh		IN	A	127.0.0.1 ; TODO
+dns		IN	A	194.167.0.40
+www		IN	A	194.167.0.38
+ssh		IN	A	194.167.0.39
