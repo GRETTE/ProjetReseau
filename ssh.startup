@@ -1,4 +1,4 @@
 # TODO : configurer eth0 et le lancement du serveur ssh
-ifconfig eth0 194.167.0.39 netmask 255.255.255.240 up
+ifconfig eth0 194.167.0.39/28
 route add default gw 194.167.0.35
 /etc/init.d/ssh start

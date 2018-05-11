@@ -1,2 +1,1 @@
 dhclient
-echo "nameserver 194.167.0.40" > /etc/resolv.conf
