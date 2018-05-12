@@ -22,22 +22,16 @@ iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to 10.0.0.4
 iptables -F
 iptables -X
 
-#fermer les connections
-iptables -P INPUT DROP
-iptables -P OUTPUT DROP
+#Connexions par défaut
+iptables -P INPUT ACCEPT
+iptables -P OUTPUT ACCEPT
 iptables -P FORWARD DROP
 
 
-#communiquer avec le routeur
-iptables -A INPUT -i eth1 -j ACCEPT
-iptables -A OUTPUT -o eth1 -j ACCEPT
 iptables -A FORWARD -m state --state  ESTABLISHED,RELATED -j ACCEPT
 
 #permettre au réseau lana de sortir
 iptables -A FORWARD -i eth1 -o eth0 -j ACCEPT
-iptables -A INPUT -i eth0 -j ACCEPT
-iptables -A OUTPUT -o eth0 -j ACCEPT
-
 
 #donner un accès ssh au réseau lanb
 iptables -A FORWARD -p tcp -i eth0 -o eth1 --dport 22 -s 194.167.0.32/28 -j ACCEPT
