@@ -1,2 +1,7 @@
 dhclient
 /etc/init.d/ssh start
+chmod 755 /home/guest
+chmod 700 /home/guest/.ssh
+chmod 600 /home/guest/.ssh/authorized_keys
+mkdir /home/guest/.ssh
+chown -R guest /home/guest/

@@ -9,10 +9,6 @@ ifconfig eth1 192.168.161.130/26
 /etc/init.d/dhcp3-server start
 
 #NAT
-#iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to 10.0.0.4
-
-#iptables -t nat -A POSTROUTING -o eth0 -j MASQUERADE
-
 iptables -t nat -A PREROUTING -i eth0 -p tcp --dport 22 -j DNAT --to 192.168.161.131:22
 
 iptables -t nat -A POSTROUTING -o eth0 -j SNAT --to 10.0.0.4
